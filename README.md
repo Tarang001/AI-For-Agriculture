@@ -11,6 +11,7 @@ The objective of this work is to study how architectural complexity and modality
 
 ## Repository Structure
 
+├── baseline_model.ipynb  
 ├── second-aiforagri.ipynb  
 ├── Third_model.ipynb  
 ├── Fourth_Moddel.ipynb  
@@ -25,29 +26,42 @@ Each notebook is self-contained and can be executed independently.
 
 | Model No. | Notebook Name            | Description                               | Validation Accuracy |
 |----------|--------------------------|-------------------------------------------|---------------------|
-| 2        | second-aiforagri.ipynb   | Baseline multimodal model                 | 0.58947             |
+| 1        | first_model.ipynb        | Baseline model (reference implementation) | 0.53684             |     
+| 2        | second-aiforagri.ipynb   | First improved multimodal model           | 0.58947             |
 | 3        | Third_model.ipynb        | Improved spectral feature learning        | 0.61052             |
 | 4        | Fourth_Moddel.ipynb      | CNN ensemble (RGB + MS + HS)              | 0.65263             |
-| 5        | fifth_model.ipynb        | Deep multimodal fusion (final model)      | 0.68421  (best)     |
-
-The accuracy increases monotonically across models.
+| 5        | fifth_model.ipynb        | Deep multimodal fusion (final model)      | Highest (Best)      |
 
 ---
 
 ## Model Descriptions
 
-### Model 2: Baseline Multimodal Model  
+### Model 1: Baseline Model  
+**Notebook:** first_model.ipynb  
+**Accuracy:** 0.53684
+
+This model serves as the baseline reference for all subsequent experiments.
+
+ - Three-Stage Training Pipeline: The model is trained incrementally: Stage 1 focuses on Multispectral (MS) features, Stage 2 on Hyperspectral (HS) features, and Stage 3 performs late-fusion of the pretrained encoders.
+ - Spectral Feature Engineering
+ - Targeted Hyperspectral Processing
+ - Late-Fusion Architecture
+ - Advanced Training Techniques
+
+---
+
+### Model 2: First Improved Multimodal Model  
 **Notebook:** second-aiforagri.ipynb  
 **Accuracy:** 0.58947  
 
-This model serves as the baseline for comparison.
+This model builds upon the baseline and introduces a basic multimodal learning pipeline.
 
 - Basic preprocessing for RGB, MS, and HS images  
 - Standard CNN-based feature extraction  
 - Minimal hyperparameter tuning  
 - Limited interaction between modalities  
 
-This model establishes a reference point for further improvements.
+This model establishes the first measurable improvement over the baseline.
 
 ---
 
@@ -55,13 +69,11 @@ This model establishes a reference point for further improvements.
 **Notebook:** Third_model.ipynb  
 **Accuracy:** 0.61052  
 
-This model improves upon the baseline by better utilizing spectral information.
+This model improves upon Model 2 by better utilizing spectral information.
 
 - Enhanced handling of hyperspectral bands  
 - Improved feature extraction for spectral–spatial patterns  
 - Reduced information loss compared to simple band aggregation  
-
-The model shows a clear improvement, demonstrating the importance of spectral features.
 
 ---
 
@@ -76,8 +88,6 @@ This model introduces an ensemble-style approach.
 - Combined predictions to improve generalization  
 - Use of data augmentation and GPU acceleration  
 
-This model significantly improves robustness and accuracy.
-
 ---
 
 ### Model 5: Final Model – Deep Multimodal Fusion  
@@ -88,19 +98,17 @@ This is the final and most advanced model in the repository.
 
 #### Architecture Overview
 
-Each modality is processed through a dedicated deep backbone:
-
-- RGB images use EfficientNet-B0  
-- Multispectral images use ResNet-18  
-- Hyperspectral images use ResNet-18  
+- RGB branch: EfficientNet-B0  
+- Multispectral branch: ResNet-18  
+- Hyperspectral branch: ResNet-18  
 
 Each branch produces a 512-dimensional feature vector.
 
 #### Feature Fusion
 
-- Features from RGB, MS, and HS branches are concatenated  
+- Feature concatenation across all modalities  
 - Combined feature vector size: 1536  
-- Passed through fully connected layers for classification  
+- Fully connected layers for final classification  
 
 #### Training Configuration
 
@@ -112,12 +120,10 @@ Each branch produces a 512-dimensional feature vector.
 
 #### Why This Model Performs Best
 
-- Deep feature-level fusion instead of shallow averaging  
+- Deep feature-level fusion  
 - Strong modality-specific representation learning  
-- Efficient handling of spectral and spatial information  
-- Robust training strategy with cross-validation and TTA  
-
-This model represents a production-ready multimodal learning pipeline.
+- Effective use of spectral and spatial information  
+- Robust training and evaluation strategy  
 
 ## Notes
 
