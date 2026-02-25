@@ -1,176 +1,137 @@
-🌾 Beyond Visible Spectrum: AI for Agriculture
-Multimodal Crop Disease Classification (ICPR 2026)
+# Beyond Visible Spectrum: AI for Agriculture  
+## Multimodal Crop Disease Classification (ICPR 2026)
 
-This repository documents a progressive modeling journey for multimodal crop disease classification using RGB, Multispectral (MS), and Hyperspectral (HS) imagery.
-Each model is saved as a separate notebook and named according to its model number, showing a clear improvement in accuracy and design sophistication.
+This repository presents a structured progression of deep learning models developed for multimodal crop disease classification using RGB, Multispectral (MS), and Hyperspectral (HS) imagery.  
+Each model is saved as a separate notebook and named according to its model number.  
+The models are designed incrementally, with accuracy improving at each stage.
 
-The goal of this work is to explore how increasingly advanced architectures and fusion strategies improve classification performance on agricultural disease data.
+The objective of this work is to study how architectural complexity and modality fusion improve classification performance in agricultural datasets.
 
-📁 Repository Structure
-├── second-aiforagri.ipynb
-├── Third_model.ipynb
-├── Fourth_Moddel.ipynb
-├── fifth_model.ipynb
-└── README.md
+---
 
-Each notebook represents an independent experiment and can be run individually.
+## Repository Structure
 
-📊 Model Performance Summary
-Model	Notebook Name	Key Idea	Validation Accuracy
-2	second-aiforagri.ipynb	Baseline multimodal pipeline	0.58947
-3	Third_model.ipynb	Spectral feature learning improvements	0.61052
-4	Fourth_Moddel.ipynb	CNN ensemble (RGB + MS + HS)	0.65263
-5	fifth_model.ipynb	Deep multimodal fusion (final model)	Highest (Final)
+├── second-aiforagri.ipynb  
+├── Third_model.ipynb  
+├── Fourth_Moddel.ipynb  
+├── fifth_model.ipynb  
+└── README.md  
 
-📈 Accuracy increases monotonically, reflecting systematic architectural and training improvements.
+Each notebook is self-contained and can be executed independently.
 
-🔹 Model-wise Explanation
-🔹 Second Model (Baseline Multimodal Model)
+---
 
-Notebook: second-aiforagri.ipynb
-Accuracy: 0.58947
+## Model Performance Summary
 
-🔧 Key Characteristics
+| Model No. | Notebook Name            | Description                               | Validation Accuracy |
+|----------|--------------------------|-------------------------------------------|---------------------|
+| 2        | second-aiforagri.ipynb   | Baseline multimodal model                 | 0.58947             |
+| 3        | Third_model.ipynb        | Improved spectral feature learning        | 0.61052             |
+| 4        | Fourth_Moddel.ipynb      | CNN ensemble (RGB + MS + HS)              | 0.65263             |
+| 5        | fifth_model.ipynb        | Deep multimodal fusion (final model)      | Highest (Best)      |
 
-Uses basic preprocessing for RGB, MS, and HS images.
+The accuracy increases monotonically across models.
 
-Relies on standard CNN feature extraction.
+---
 
-Minimal tuning of:
+## Model Descriptions
 
-Learning rate
+### Model 2: Baseline Multimodal Model  
+**Notebook:** second-aiforagri.ipynb  
+**Accuracy:** 0.58947  
 
-Batch size
+This model serves as the baseline for comparison.
 
-Image resizing
+- Basic preprocessing for RGB, MS, and HS images  
+- Standard CNN-based feature extraction  
+- Minimal hyperparameter tuning  
+- Limited interaction between modalities  
 
-Limited fusion between modalities.
+This model establishes a reference point for further improvements.
 
-⚠️ Limitations
+---
 
-Modalities are not deeply integrated.
+### Model 3: Improved Spectral Learning  
+**Notebook:** Third_model.ipynb  
+**Accuracy:** 0.61052  
 
-Spectral richness of HS data is underutilized.
+This model improves upon the baseline by better utilizing spectral information.
 
-Acts primarily as a reference baseline.
+- Enhanced handling of hyperspectral bands  
+- Improved feature extraction for spectral–spatial patterns  
+- Reduced information loss compared to simple band aggregation  
 
-🔹 Third Model (Improved Spectral Learning)
+The model shows a clear improvement, demonstrating the importance of spectral features.
 
-Notebook: Third_model.ipynb
-Accuracy: 0.61052
+---
 
-🔧 Key Improvements
+### Model 4: CNN Ensemble Model  
+**Notebook:** Fourth_Moddel.ipynb  
+**Accuracy:** 0.65263  
 
-Better handling of hyperspectral bands.
+This model introduces an ensemble-style approach.
 
-Avoids naive band-mean aggregation.
+- Separate CNN backbones for RGB, MS, and HS inputs  
+- Independent feature extraction per modality  
+- Combined predictions to improve generalization  
+- Use of data augmentation and GPU acceleration  
 
-Focuses on learning discriminative spectral–spatial patterns.
+This model significantly improves robustness and accuracy.
 
-Introduces improved feature extraction logic.
+---
 
-📈 Outcome
+### Model 5: Final Model – Deep Multimodal Fusion  
+**Notebook:** fifth_model.ipynb  
+**Accuracy:** Highest (Best Performing Model)  
 
-Clear performance gain over the baseline.
+This is the final and most advanced model in the repository.
 
-Demonstrates that spectral information matters, but still lacks strong modality fusion.
+#### Architecture Overview
 
-🔹 Fourth Model (CNN Ensemble Model)
+Each modality is processed through a dedicated deep backbone:
 
-Notebook: Fourth_Moddel.ipynb
-Accuracy: 0.65263
+- RGB images use EfficientNet-B0  
+- Multispectral images use ResNet-18  
+- Hyperspectral images use ResNet-18  
 
-🧠 Architecture Overview
+Each branch produces a 512-dimensional feature vector.
 
-Independent CNN backbones for:
+#### Feature Fusion
 
-RGB images
-
-Multispectral images
-
-Hyperspectral images
-
-Features from all branches are combined as an ensemble.
-
-🔧 Technical Details
-
-Uses timm models.
-
-Albumentations for data augmentation.
-
-Standard cross-entropy loss.
-
-GPU-accelerated training on Kaggle.
-
-🚀 Strengths
-
-First model to treat each modality as a first-class citizen.
-
-Stronger generalization.
-
-Sets the stage for deep fusion.
-
-⭐ Fifth Model (Final Model – Deep Multimodal Fusion)
-
-Notebook: fifth_model.ipynb
-Accuracy: Highest (Best Performing Model)
-
-This is the final and most important model in the repository.
-
-🧠 Architecture: MultimodalFusionNet
-
-Each modality is processed through a dedicated deep backbone, and learned features are fused jointly.
-
-🔹 Modal Branches
-Modality	Backbone	Input Channels	Output Features
-HS	ResNet-18	30 channels	512
-MS	ResNet-18	5 channels	512
-RGB	EfficientNet-B0	3 channels	512
-🔗 Feature Fusion Strategy
-
-Feature vectors from all three branches are concatenated:
-
-512 (HS) + 512 (MS) + 512 (RGB) = 1536-D vector
-
-Passed through a fully connected MLP head:
-
-1536 → 512 → 3 (Health / Rust / Other)
-⚙️ Training Configuration
-
-Loss Function: Cross-Entropy Loss
-
-Optimizer: Adam
-
-Mixed Precision Training: Enabled (torch.cuda.amp)
-
-Cross-Validation: 5-Fold Stratified K-Fold
-
-Evaluation Metric: Accuracy
-
-🔁 Advanced Techniques Used
-
-Stratified K-Fold Cross Validation
-
-Out-of-Fold (OOF) predictions
-
-Test-Time Augmentation (TTA)
-
-Horizontal flip
-
-Vertical flip
-
-Averaged predictions
-
-✅ Why This Model Works Best
-
-Learns modality-specific representations.
-
-Performs deep feature-level fusion, not shallow averaging.
-
-EfficientNet enhances RGB texture understanding.
-
-ResNet-based HS/MS branches preserve spectral richness.
-
-Strong regularization via cross-validation and TTA.
+- Features from RGB, MS, and HS branches are concatenated  
+- Combined feature vector size: 1536  
+- Passed through fully connected layers for classification  
+
+#### Training Configuration
+
+- Loss function: Cross-Entropy Loss  
+- Optimizer: Adam  
+- Mixed precision training enabled  
+- 5-Fold Stratified Cross-Validation  
+- Test-Time Augmentation (horizontal and vertical flips)  
+
+#### Why This Model Performs Best
+
+- Deep feature-level fusion instead of shallow averaging  
+- Strong modality-specific representation learning  
+- Efficient handling of spectral and spatial information  
+- Robust training strategy with cross-validation and TTA  
 
 This model represents a production-ready multimodal learning pipeline.
+
+---
+
+## Conclusion
+
+This repository demonstrates a clear progression from simple baseline models to an advanced deep multimodal fusion architecture.  
+The final model achieves the highest accuracy and effectively leverages RGB, multispectral, and hyperspectral data.
+
+The fifth model is recommended for deployment, competition submission, or further research extensions.
+
+---
+
+## Notes
+
+- All experiments were conducted using GPU acceleration on Kaggle  
+- The code is organized for clarity and reproducibility  
+- This work is part of an ongoing research effort for ICPR 2026  
