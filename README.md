@@ -30,7 +30,7 @@ Each notebook is self-contained and can be executed independently.
 | 2        | second-aiforagri.ipynb   | First improved multimodal model           | 0.58947             |
 | 3        | Third_model.ipynb        | Improved spectral feature learning        | 0.61052             |
 | 4        | Fourth_Moddel.ipynb      | CNN ensemble (RGB + MS + HS)              | 0.65263             |
-| 5        | fifth_model.ipynb        | Deep multimodal fusion (final model)      | Highest (Best)      |
+| 5        | fifth_model.ipynb        | Deep multimodal fusion (final model)      | 0.68421 (Best)      |
 
 ---
 
