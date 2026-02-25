@@ -119,17 +119,6 @@ Each branch produces a 512-dimensional feature vector.
 
 This model represents a production-ready multimodal learning pipeline.
 
----
-
-## Conclusion
-
-This repository demonstrates a clear progression from simple baseline models to an advanced deep multimodal fusion architecture.  
-The final model achieves the highest accuracy and effectively leverages RGB, multispectral, and hyperspectral data.
-
-The fifth model is recommended for deployment, competition submission, or further research extensions.
-
----
-
 ## Notes
 
 - All experiments were conducted using GPU acceleration on Kaggle  
